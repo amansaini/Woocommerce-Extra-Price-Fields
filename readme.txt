@@ -3,8 +3,8 @@ Contributors: aman086
 Donate link: http://amansaini.me/
 Requires at least: 3.0.5
 Tags:woocommerce,ecommerce,woocommerce price extension
-Tested up to: 3.5
-Stable tag: 1.0
+Tested up to: 3.8.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,10 +12,9 @@ Woocommerce Extra Price Fields is Plugin for adding extra price description to s
 
 == Description ==
 
-Woocommerce Extra Price Fields is Plugin for adding extra price description to show in front end.This is very usefull for the users in countries/regions
-where it is required to show product price per 100gm or per 100 piece along with the product solo price.
+Woocommerce Extra Price Fields is Plugin for adding extra price description to show in front end.
 
-
+It can  be used to show extra info with price e.g $250 per 100gm
 
 = Features: =
 
