@@ -1,4 +1,4 @@
-Woocommerce-extra-price-fields
+Woocommerce Extra Price Fields
 ==============================
 Woocommerce Extra Price Fields is Plugin for adding extra price description to show in front end.
 
