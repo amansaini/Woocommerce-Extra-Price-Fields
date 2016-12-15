@@ -30,7 +30,21 @@
 
 function add_custom_price_box() {
 
-  woocommerce_wp_text_input( array( 'id' => 'pro_price_extra_info', 'class' => 'wc_input_price_extra_info short', 'label' => __( 'Price Extra Info', 'woocommerce' ) ) );
+  woocommerce_wp_text_input( 
+  	array( 
+  		'id' => 'pro_price_extra_info', 
+  		'class' => 'wc_input_price_extra_info short', 
+  		'label' => __( 'Price Extra Info', 'woocommerce' ) 
+  		) 
+  	);
+  
+  woocommerce_wp_checkbox( 
+  	array( 
+  		'id' => 'pro_price_extra_info_position',
+  		'class' => 'wc_input_price_extra_info_position',
+  		'label' => __( 'Display extra info before price', 'woocommerce' )
+  		) 
+  	);
 
 }
 
@@ -41,8 +55,11 @@ add_action( 'woocommerce_product_options_general_product_data', 'add_custom_pric
 function custom_woocommerce_process_product_meta( $post_id ) {
 
 
+  $pro_price_extra_info =  stripslashes( $_POST['pro_price_extra_info'] );
+  $pro_price_checkbox = isset( $_POST['pro_price_extra_info_position'] ) ? 'yes' : 'no';
 
-  update_post_meta( $post_id, 'pro_price_extra_info', stripslashes( $_POST['pro_price_extra_info'] ) );
+  update_post_meta( $post_id, 'pro_price_extra_info_position', $pro_price_checkbox );
+  update_post_meta( $post_id, 'pro_price_extra_info',  $pro_price_extra_info );
 }
 
 add_action( 'woocommerce_process_product_meta', 'custom_woocommerce_process_product_meta', 2 );
@@ -54,6 +71,7 @@ function add_custom_price_front( $p, $obj ) {
   $post_id = $obj->post->ID;
 
   $pro_price_extra_info = get_post_meta( $post_id, 'pro_price_extra_info', true );
+  $pro_price_extra_info_position = get_post_meta( $post_id, 'pro_price_extra_info_position', true );
 
   if ( is_admin() ) {
     //show in new line
@@ -67,13 +85,15 @@ function add_custom_price_front( $p, $obj ) {
   }
 
   if ( !empty( $additional_price ) ) {
-    return  $p . $additional_price ;
-  }
-  else {
+  	if ( $pro_price_extra_info_position == 'yes' ){
+  		return $additional_price . $p;
+  	}else{
+  		return  $p . $additional_price;
+  	}
+    
+  } else {
     return  $p ;
   }
-
-
 
 }
 
